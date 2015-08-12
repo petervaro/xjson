@@ -1,0 +1,16 @@
+{
+    "hello": "world", // a comment right after the content
+    // a comment between two lines of contents
+    "// this is not a comment!": true,
+    // "this is not a string!"
+    "another": /* a comment inline */ 12,
+    /* and a
+    multiline
+    comment
+    before
+    content */ "xxx": "/* this is not a comment either!", /* But this one is! */
+    "Fortunately this is not a comment */": 34,
+    "With this neat little trick /*
+    */we have multiline, concatenated /*
+    */key here": "with some value"
+}
