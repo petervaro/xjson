@@ -2,14 +2,15 @@
 ## INFO ##
 
 # Import python modules
-from json import *
-from re   import (compile,
-                  finditer,
-                  DOTALL,
-                  VERBOSE,
-                  MULTILINE)
-from json import (load  as __json_load,
-                  loads as __json_loads)
+from json      import *
+from functools import wraps
+from re        import (compile,
+                       finditer,
+                       DOTALL,
+                       VERBOSE,
+                       MULTILINE)
+from json      import (load  as __json_load,
+                       loads as __json_loads)
 
 
 
@@ -25,6 +26,7 @@ __PATTERN = compile(r"""
 
 
 #------------------------------------------------------------------------------#
+@wraps(__json_loads)
 def loads(dirty, *args, **kwargs):
     clean = []
     index = 0
@@ -41,20 +43,15 @@ def loads(dirty, *args, **kwargs):
     # Let the built-in json-function process the cleaned string
     return __json_loads(''.join(clean), *args, **kwargs)
 
-# Copy docstring
-loads.__doc__ = __json_loads.__doc__
-
 
 
 #------------------------------------------------------------------------------#
+@wraps(__json_load)
 def load(file_path, *args, **kwargs):
     # Open passed file path
     with open(file_path, mode='r') as file:
         # Return processed object
         return loads(file.read(), *args, **kwargs)
-
-# Copy docstring
-load.__doc__ = __json_load.__doc__
 
 
 
